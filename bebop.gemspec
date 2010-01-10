@@ -3,11 +3,11 @@ Gem::Specification.new do |s|
   s.version = '0.1.0'
   s.date = '2010-1-10'
  
-  s.description = "A small Sinatra extension for resource routing"
-  s.summary = "A small Sinatra extension for resource routing"
+  s.description = "A small Sinatra/Monk extension for resource routing"
+  s.summary = "A small Sinatra/Monk extension for resource routing"
  
   s.authors = ["John Bender"]
-  s.email = 'john.m.bender@gmail.com'
+  s.homepage = 'http://github.com/johnbender/bebop'
  
   # = MANIFEST =
   s.files = %w[ 

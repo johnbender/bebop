@@ -5,7 +5,6 @@ class MyApp < Sinatra::Base
   register Bebop
 
   resource :foos do |foos|
-    
     # Bebop provides some simple targeting for before and after filters, with the 
     # caveat that they must be defined before the routes they target within the resource block    
     # To have your filter run before all routes under a given resource and its child resources
@@ -24,10 +23,9 @@ class MyApp < Sinatra::Base
 
     foos.new do
       "#{@all} #{@new}" # => 'all new'
-
     end
    
-    # You can target the vanilla methods by providing the :identifier hash option
+    # You can target the vanila methods by providing the :identifier hash option
     #
     # GET /foos/baz
     foos.get '/baz', :identifier => :new do

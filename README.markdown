@@ -24,8 +24,36 @@ Requires rspec version 1.2.9 or higher
 
 	cd /path/to/bebop; spec spec
 
-use
----
+sample
+------
+
+If you were using an Active Record model Foo:
+
+	require 'bebop'
+	require 'sinatra'
+	require 'foo'
+
+	class MyApp < Sinatra::Base
+	  register Bebop	
+	  
+	  resource :foos do |foos|
+	    
+	    # GET /foos/:foo_id
+	    foos.show do
+	      @foo = Foo.find(params[:foo_id])
+	      haml :'foos/show'
+	    end
+
+	    # GET /foos/new
+	    foos.new do
+	      @foo = Foo.new
+	      haml :'foos/new'
+	    end
+	  end
+	end
+
+more detail
+-----------
 
 See the examples directory. You can play with each of the examples as follows:
 
