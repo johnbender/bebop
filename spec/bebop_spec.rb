@@ -141,6 +141,11 @@ describe Bebop do
     get '/foos/new'
     TestClass.global = nil
   end
+
+  it "should not prepend previous nested routes on non nested routes that follow" do
+    get '/foos/do/something'
+    last_response.body.should == 'success'
+  end
   
   BEFORE_BARS = '__before_bars__'
   BEFORE_UPDATE = '__before_update__'
@@ -187,6 +192,8 @@ describe Bebop do
 
         bar.show { "show #{params[:foo_id]} #{params[:bar_id]}" }
       end
+
+      foo.get('/do/something') { 'success' }
     end    
   end
 end

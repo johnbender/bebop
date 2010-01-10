@@ -44,7 +44,7 @@ class MyApp < Sinatra::Base
     # option, bebop will define a relative path helper. See the nested resource below for the nameing of those
     # methods
     # 
-    # POST /foos/redirect
+    # POST /foos/do/redirect
     foos.get 'do/redirect' do
       # Redirects to /foos/1
       redirect foos_show_path(1)

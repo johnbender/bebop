@@ -36,11 +36,11 @@
        @before, @after, @routes = before_all, after_all, []
      end
      
-     def get(route='', options={}, &block)
+     def get(route, options={}, &block)
        add_route(:get, route, options, block)
      end
 
-     def put(route='', options={}, &block)
+     def put(route, options={}, &block)
        add_route(:put, route, options, block)
      end
      
@@ -48,11 +48,11 @@
        add_route(:post, route, options, block)
      end
 
-     def delete(route='', options={}, &block)
+     def delete(route, options={}, &block)
        add_route(:delete, route, options,  block)
      end
 
-     def head(route='', options={}, &block)
+     def head(route, options={}, &block)
        add_route(:head,  route, options,  block)
      end
 
@@ -95,14 +95,14 @@
      def resource(name, &block)
        before_filters = filters(@before, :all, name)
        after_filters = filters(@after, :all, name)
-
-       router = self.class.new(all_resources.compact << name, before_filters, after_filters)
+              
+       router = self.class.new(all_resources + [name], before_filters, after_filters)
        yield(router)
        @routes += router.routes
      end
 
      def print
-       #TODO 6! 6! Block parameters, Ah Ah Ah! 
+       #TODO 6! 6! Block parameters, Ah Ah Ah! -> probably need route objects
        @routes.each do |method, route, options, block, helper, identifier|
          puts "#{route}"
          puts "  method:     #{method.to_s.upcase}"
@@ -115,7 +115,8 @@
      private
      
      def all_resources
-       @parent_resources << @current_resource
+       #in the initial call to resource there is current_resource
+       @current_resource ? @parent_resources + [@current_resource] : @parent_resources
      end
 
      def resource_identifier(resource=@current_resource)

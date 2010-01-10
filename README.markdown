@@ -1,7 +1,7 @@
 Bebop
 =====
 
-Bebop is small Sinatra/Monk extension for DRY resource based routing. It provides targeted filters, path helpers, nested resources, printable routing information, and familiar actions methods like new, show, destroy, update, and index.
+Bebop is small Sinatra/Monk extension for DRY resource based routing. It provides targeted filters, path helpers, nested resources, printable routing information, and familiar action methods like new, show, destroy, update, and index.
 
 The name comes from its happy partnering with the [Monk](http://monkrb.com) glue framework, as Thelonius Monk is considered to be the father of bebop.
 
