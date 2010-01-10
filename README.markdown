@@ -1,7 +1,10 @@
 Bebop
 =====
 
-Bebop is small Sinatra extension for DRY resource based routing. It provides targetted filters, path helpers, nested resources, printable routing information, and familiar actions methods like new, show, destroy, update, and index. 
+Bebop is small Sinatra/Monk extension for DRY resource based routing. It provides targeted filters, path helpers, nested resources, printable routing information, and familiar actions methods like new, show, destroy, update, and index.
+
+The name comes from its happy partnering with the [Monk](http://monkrb.com) glue framework, as Thelonius Monk is considered to be the father of bebop.
+
 
 dependencies
 ------------
@@ -37,6 +40,18 @@ See the examples directory. You can play with each of the examples as follows:
 	>> Maximum connections set to 1024
 	>> Listening on 0.0.0.0:4567, CTRL+C to stop
 
+routes
+------
+
+Run your sinatra/monk app with the PROUTES env variable set to view the routes created with the resource method
+
+	$ ruby my_app.rb PROUTES=true
+	
+or 
+
+	$ thor monk:start PROUTES=true
+
+NOTE: planning to change the formatting soon, as it currently sucks
 	
 license
 -------
