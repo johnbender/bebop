@@ -48,7 +48,7 @@ describe Sinatra::Bebop do
 
   it "should respond correctly when the route is consulted" do
     post '/foos'
-    last_response.body.should match(/create/)
+    last_response.body.should == BEFORE_ALL
   end
 
   it "should call before and after blocks correctly based on the identifier" do
@@ -121,7 +121,7 @@ describe Sinatra::Bebop do
 
       foo.get(:arbitrary) { 'baz' }        
 
-      foo.create { "create#{@all}#{@update}#{@bars}" }
+      foo.create { "#{@all}#{@update}#{@bars}" }
       foo.update { "#{@all}#{@update}#{@bars}" }
 
       foo.new { "new" }
