@@ -65,10 +65,7 @@ See the examples directory. You can play with each of the examples as follows:
 
     $ pwd
 	/path/to/bebop
-	$ irb
-	>> load 'examples/filters.rb' #or 'examples/routes.rb'
-	=> true
-	>> MyApp.run!
+	$ ruby examples/routes.rb 
 	== Sinatra/0.9.4 has taken the stage on 4567 for development with backup from Thin
 	>> Thin web server (v1.2.4 codename Flaming Astroboy)
 	>> Maximum connections set to 1024
