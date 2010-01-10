@@ -3,8 +3,7 @@ Gem::Specification.new do |s|
   s.version = '0.1.0'
   s.date = '2010-1-10'
  
-  s.description = "A small Sinatra/Monk extension for resource routing"
-  s.summary = "A small Sinatra/Monk extension for resource routing"
+  s.summary = s.description = "A small Sinatra/Monk extension for resource routing"
  
   s.authors = ["John Bender"]
   s.homepage = 'http://github.com/johnbender/bebop'
