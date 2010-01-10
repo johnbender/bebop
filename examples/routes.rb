@@ -1,13 +1,18 @@
+require File.join(File.dirname(__FILE__), '..', 'lib', 'bebop')
+require 'sinatra'
+
 class MyApp < Sinatra::Base
+  register Bebop
+
   resource :foos do |foos|
 
     # Any of the traditional sinatra methods called on the block parameter
     # will take the first argument (or an empty string) and apply it to
     # the resource base
     #
-    # GET /foos/bar
-    foos.get '/bar' do
-      haml :bar
+    # GET /foos/baz
+    foos.get '/baz' do
+      'baz'
     end
     
     # There are 7 helper methods for the traditional resource actions. They
@@ -15,12 +20,11 @@ class MyApp < Sinatra::Base
     # for the corresponding Sinatra method
     #
     # GET /foos
-    foos.index do
-      haml :index
-    end
+    foos.index {}
 
-    # In the case of the actions that require parameters the paramater is simple the singular
-    # version of the resource with '_id' appended.
+    # For actions that require parameters the parameter name is derived from the singularized
+    # name of the resource with '_id' appended.
+    #
     # GET /foos/:foo_id
     foos.show {}
 
@@ -30,8 +34,9 @@ class MyApp < Sinatra::Base
     # 
     # POST /foos
     foos.create do
-      @foo = Foo.new(params)
-      redirect foos_show_path(@foo.id)
+      
+      # Redirects to /foos/1
+      redirect foos_show_path(1)
     end
 
     # GET /foos/new
@@ -46,16 +51,17 @@ class MyApp < Sinatra::Base
     # DELETE /foos/:foo_id
     foos.destroy {}
 
-    # If you want to represent the relationship of your models through nested resources simply call
-    # the resource method on foos and all new routes will be nested and parameterized properly
+    # If you want to represent the relationship of your models through nested resources use
+    # the resource method with the block parameter and all new routes will be nested and 
+    # parameterized properly
     #
+    # Prefix all with /foos/:foo_id
     foos.resource :bars do |bars|
       
       # GET /foos/:foo_id/bars/:bar_id
       bars.show do
-        "foo: #{params[:food_id]} bar: #{params[:bar_id]}"
+        "foo: #{params[:foo_id]} bar: #{params[:bar_id]}"
       end 
-
       
       bars.get '/redirect' do
         

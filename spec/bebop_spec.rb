@@ -1,9 +1,18 @@
 require File.join(File.dirname(__FILE__), '..', 'lib', 'bebop')
 require 'rack/test'
+require 'sinatra'
 
-class TestClass < Sinatra::Base; end
+class TestClass < Sinatra::Base
+  register Bebop
+  def self.global
+    @@global
+  end
+  def self.global=(val)
+    @@global = val
+  end
+end
 
-describe Sinatra::Bebop do
+describe Bebop do
   include Rack::Test::Methods
   
   def app
@@ -11,12 +20,16 @@ describe Sinatra::Bebop do
     @test_app
   end
 
-  before(:all) do
+  before :all do
     app
     @class = TestClass
     use_bebop 
   end
-  
+
+  before :each do
+    TestClass.global = nil
+  end
+
   it "should define route helpers properly for routes specifying an identifier" do
     @class.instance_methods.should include('foos_bars_index_path')
     @class.instance_methods.should include('foos_create_path')
@@ -28,7 +41,7 @@ describe Sinatra::Bebop do
   end
 
   it "should raise an error when the wrong number of paramters are passed to a route helper" do
-    lambda {@test_app.foos_bars_update_path(1)}.should raise_error(Sinatra::Bebop::InvalidPathArgumentError)
+    lambda {@test_app.foos_bars_update_path(1)}.should raise_error(Bebop::InvalidPathArgumentError)
   end
 
   it "should define a route with new for the new method" do
@@ -48,7 +61,7 @@ describe Sinatra::Bebop do
 
   it "should respond correctly when the route is consulted" do
     post '/foos'
-    last_response.body.should == BEFORE_ALL
+    last_response.body.should match(/#{BEFORE_ALL}/)
   end
 
   it "should call before and after blocks correctly based on the identifier" do
@@ -98,10 +111,42 @@ describe Sinatra::Bebop do
     post '/foos' 
     last_response.body.should_not match(/#{BEFORE_BARS}/)
   end
+
+  it "should call before and after filters without any identifier specified before all routes" do
+    put '/foos/1'
+    last_response.body.should match(/#{BEFORE_ALL_2}/)
+
+    post '/foos'
+    last_response.body.should match(/#{BEFORE_ALL_2}/)
+
+    get '/foos/1/bars'
+    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    
+    delete '/foos/1/bars/1'
+    last_response.body.should match(/#{BEFORE_ALL_2}/)    
+
+    put '/foos/1/bars/1'
+    last_response.body.should match(/#{BEFORE_ALL_2}/)
+  end
+  
+  it "should call before and after filters that specify multiple identifiers before the proper routes" do
+    post '/foos'
+    TestClass.global.should == AFTER_VALUE
+
+    put '/foos/1'
+    TestClass.global.should == AFTER_VALUE
+  end
+  
+  it "should not call before and after filters that specify multiple parameters on anyting else" do
+    get '/foos/new'
+    TestClass.global = nil
+  end
   
   BEFORE_BARS = '__before_bars__'
   BEFORE_UPDATE = '__before_update__'
   BEFORE_ALL = '__all__'
+  BEFORE_ALL_2 = '__2all__'
+  AFTER_VALUE = '__after__'
 
   def use_bebop
     # ENV['PROUTES']='t'
@@ -109,6 +154,10 @@ describe Sinatra::Bebop do
       
       foo.before :all do
         @all = BEFORE_ALL
+      end
+
+      foo.before do
+        @all2 = BEFORE_ALL_2
       end
 
       foo.before :update do
@@ -119,18 +168,22 @@ describe Sinatra::Bebop do
         @bars = BEFORE_BARS
       end
 
+      foo.after :create, :update do
+        TestClass.global = AFTER_VALUE
+      end
+
       foo.get(:arbitrary) { 'baz' }        
 
-      foo.create { "#{@all}#{@update}#{@bars}" }
-      foo.update { "#{@all}#{@update}#{@bars}" }
+      foo.create { "#{@all2}#{@all}#{@update}#{@bars}" }
+      foo.update { "#{@all2}#{@all}#{@update}#{@bars}" }
 
       foo.new { "new" }
       foo.edit { "edit #{params[:foo_id]}" }
 
       foo.resource :bars do |bar|
-        bar.index { "#{@all}#{@update}#{@bars}" }
-        bar.update { "#{@all}#{@update}#{@bars}" }
-        bar.destroy { "#{@all}#{@update}#{@bars}" }
+        bar.index { "#{@all2}#{@all}#{@update}#{@bars}" }
+        bar.update { "#{@all2}#{@all}#{@update}#{@bars}" }
+        bar.destroy { "#{@all2}#{@all}#{@update}#{@bars}" }
 
         bar.show { "show #{params[:foo_id]} #{params[:bar_id]}" }
       end
