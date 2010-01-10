@@ -15,7 +15,7 @@ dependencies
 install
 -------
 
-	sudo gem install bebop
+	gem install bebop
 
 verify
 ------

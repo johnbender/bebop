@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
  
   s.authors = ["John Bender"]
   s.homepage = 'http://github.com/johnbender/bebop'
+  s.email = 'john.m.bender@gmail.com'
  
   # = MANIFEST =
   s.files = %w[ 
