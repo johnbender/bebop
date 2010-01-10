@@ -15,6 +15,12 @@ dependencies
 install
 -------
 
+Make sure you have gemcutter.org as one of your sources:
+
+     	gem sources -a http://gemcutter.org
+
+Then:
+
 	gem install bebop
 
 verify
