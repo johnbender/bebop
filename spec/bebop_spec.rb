@@ -146,6 +146,8 @@ describe Bebop do
     get '/foos/do/something'
     last_response.body.should == 'success'
   end
+
+  it "should produce correct routes for more than 2 levels of nesting"
   
   BEFORE_BARS = '__before_bars__'
   BEFORE_UPDATE = '__before_update__'

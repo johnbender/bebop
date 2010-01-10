@@ -31,6 +31,9 @@ class MyApp < Sinatra::Base
     # GET /foos/new
     foos.new {}
 
+    # POST /foos
+    foos.create {}
+
     # PUT /foos/:foo_id
     foos.update {}
     
