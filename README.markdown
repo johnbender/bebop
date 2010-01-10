@@ -1,19 +1,33 @@
-= bebop
+Bebop
+=====
 
-== DESCRIPTION:
+Bebop is small Sinatra extension for DRY resource based routing. It provides targetted filters, path helpers, nested resources, printable routing information, and familiar helper methods like new, show, destroy, update, and index. 
 
-A small Sinatra extension for resource routing
-
-== REQUIREMENTS:
+requirements
+------------
 
 * Sinatra
 * ActiveSupport
 
-== INSTALL:
+install
+-------
 
-sudo gem insall bebop
+	sudo gem install bebop
 
-== LICENSE:
+verify
+------
+	
+Requires rspec version 1.2.9 or higher
+
+	cd /path/to/bebop; spec spec
+
+use
+---
+
+see the examples directory
+
+license
+-------
 
 (The MIT License)
 
