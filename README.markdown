@@ -1,9 +1,9 @@
 Bebop
 =====
 
-Bebop is small Sinatra extension for DRY resource based routing. It provides targetted filters, path helpers, nested resources, printable routing information, and familiar helper methods like new, show, destroy, update, and index. 
+Bebop is small Sinatra extension for DRY resource based routing. It provides targetted filters, path helpers, nested resources, printable routing information, and familiar actions methods like new, show, destroy, update, and index. 
 
-requirements
+dependencies
 ------------
 
 * Sinatra
@@ -24,8 +24,20 @@ Requires rspec version 1.2.9 or higher
 use
 ---
 
-see the examples directory
+See the examples directory. You can play with each of the examples as follows:
 
+    $ pwd
+	/path/to/bebop
+	$ irb
+	>> load 'examples/filters.rb' #or 'examples/routes.rb'
+	=> true
+	>> MyApp.run!
+	== Sinatra/0.9.4 has taken the stage on 4567 for development with backup from Thin
+	>> Thin web server (v1.2.4 codename Flaming Astroboy)
+	>> Maximum connections set to 1024
+	>> Listening on 0.0.0.0:4567, CTRL+C to stop
+
+	
 license
 -------
 
