@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'bebop'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.date = '2010-1-10'
  
   s.summary = s.description = "A small Sinatra/Monk extension for resource routing"

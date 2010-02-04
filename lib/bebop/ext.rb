@@ -27,6 +27,18 @@ module Bebop
     end
   end
   
+  class Action
+    attr_accessor :route, :options, :block
+    def initialize(route, options, block)
+      @route, @options, @block = route, options, block
+    end
+
+    def method
+      self.class.to_s.downcase.to_sym
+    end
+  end
+
+  class Get < Action; end
   
   class ResourceRouter
     attr_accessor :routes 
@@ -58,7 +70,7 @@ module Bebop
     end
 
     def delete(route, options={}, &block)
-      add_route(:delete, route, options,  block)
+      add_route(:delete, route, options, block)
     end
 
     def head(route, options={}, &block)
@@ -137,7 +149,7 @@ module Bebop
     end
     
     def add_route(method, route, options, block) 
-      identifier =options[:identifier]
+      identifier = options[:identifier]
       route = append_to_path(route)
       block = add_filters_to_block(block, identifier, method)
       helper = route_helper(identifier)

@@ -147,7 +147,10 @@ describe Bebop do
     last_response.body.should == 'success'
   end
 
-  it "should produce correct routes for more than 2 levels of nesting"
+  it "should produce correct routes for more than 2 levels of nesting" do
+    get '/foos/1/bars/2/bazs' 
+    last_response.body.should match(/#{BEFORE_ALL_2}/)
+  end
   
   BEFORE_BARS = '__before_bars__'
   BEFORE_UPDATE = '__before_update__'
@@ -193,6 +196,10 @@ describe Bebop do
         bar.destroy { "#{@all2}#{@all}#{@update}#{@bars}" }
 
         bar.show { "show #{params[:foo_id]} #{params[:bar_id]}" }
+
+        bar.resource :bazs do |baz|
+          baz.index { @all2 }
+        end
       end
 
       foo.get('/do/something') { 'success' }
