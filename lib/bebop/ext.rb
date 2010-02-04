@@ -21,8 +21,8 @@ module Bebop
       
       args.inject(route.dup) do |acc, arg|
         #handle fixnums and ar objects
-        arg = (arg.kind_of?(Fixnum) ? arg : arg.id)
-        acc.sub!(PARAM_REGEX, arg.to_s) 
+        final_argument = arg.respond_to?(:to_param) ? arg.to_param : arg
+        acc.sub!(PARAM_REGEX, final_argument.to_s) 
       end
     end
   end
