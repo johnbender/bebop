@@ -1,8 +1,7 @@
-require 'active_support'
-
 module Bebop
   class InvalidPathArgumentError < ArgumentError; end
   PARAM_REGEX = /:[a-zA-Z0-9_]+/
+  
 
   def resource(name, &block)
     resource = ResourceRouter.new
@@ -31,7 +30,15 @@ module Bebop
   
   class ResourceRouter
     attr_accessor :routes 
-    
+
+    def logger
+      @@logger ||= Logger.new(STDOUT)
+    end
+ 
+    def logger=(val)
+      @@logger = val
+    end
+   
     def initialize(parent_resources=[], before_all=[], after_all=[])
       @current_resource = parent_resources.pop
       @parent_resources = parent_resources
@@ -106,11 +113,10 @@ module Bebop
     def print
       #TODO 6! 6! Block parameters, Ah Ah Ah! -> probably need route objects
       @routes.each do |method, route, options, block, helper, identifier|
-        puts "#{route}"
-        puts "  method:     #{method.to_s.upcase}"
-        puts "  helper:     #{helper}" if helper
-        puts "  identifier: #{identifier}" if identifier
-        puts
+        logger.info "#{route}"
+        logger.info "  method:     #{method.to_s.upcase}"
+        logger.info "  helper:     #{helper}" if helper
+        logger.info "  identifier: #{identifier} " if identifier
       end
     end
     
