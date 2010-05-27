@@ -1,7 +1,6 @@
 module Bebop
   class InvalidPathArgumentError < ArgumentError; end
   PARAM_REGEX = /:[a-zA-Z0-9_]+/
-  
 
   def resource(name, &block)
     resource = ResourceRouter.new
@@ -18,45 +17,32 @@ module Bebop
       unless route.scan(PARAM_REGEX).length == args.length
         raise InvalidPathArgumentError.new("invalid number of parameters #{args.length} for: #{route}")
       end
-      
+
       args.inject(route.dup) do |acc, arg|
         #handle fixnums and ar objects
         final_argument = arg.respond_to?(:to_param) ? arg.to_param : arg
-        acc.sub!(PARAM_REGEX, final_argument.to_s) 
+        acc.sub!(PARAM_REGEX, final_argument.to_s)
       end
     end
   end
-  
-  class Action
-    attr_accessor :route, :options, :block
-    def initialize(route, options, block)
-      @route, @options, @block = route, options, block
-    end
 
-    def method
-      self.class.to_s.downcase.to_sym
-    end
-  end
-
-  class Get < Action; end
-  
   class ResourceRouter
-    attr_accessor :routes 
+    attr_accessor :routes
 
     def logger
       @@logger ||= Logger.new(STDOUT)
     end
- 
+
     def logger=(val)
       @@logger = val
     end
-   
+
     def initialize(parent_resources=[], before_all=[], after_all=[])
       @current_resource = parent_resources.pop
       @parent_resources = parent_resources
       @before, @after, @routes = before_all, after_all, []
     end
-    
+
     def get(route, options={}, &block)
       add_route(:get, route, options, block)
     end
@@ -64,7 +50,7 @@ module Bebop
     def put(route, options={}, &block)
       add_route(:put, route, options, block)
     end
-    
+
     def post(route, options={}, &block)
       add_route(:post, route, options, block)
     end
@@ -80,7 +66,7 @@ module Bebop
     def new(options={}, &block)
       get 'new', options.merge(:identifier => :new), &block
     end
-    
+
     def create(options={}, &block)
       post '' , options.merge(:identifier => :create), &block
     end
@@ -116,7 +102,7 @@ module Bebop
     def resource(name, &block)
       before_filters = filters(@before, :all, name)
       after_filters = filters(@after, :all, name)
-      
+
       router = self.class.new(all_resources + [name], before_filters, after_filters)
       yield(router)
       @routes += router.routes
@@ -131,11 +117,11 @@ module Bebop
         logger.info "  identifier: #{identifier} " if identifier
       end
     end
-    
+
     private
-    
+
     def all_resources
-      #in the initial call to resource there is current_resource
+      #in the initial call to resource there isn't a current_resource
       @current_resource ? @parent_resources + [@current_resource] : @parent_resources
     end
 
@@ -147,8 +133,8 @@ module Bebop
       params = [:all] if params.empty?
       type << {:routes => params, :block => block}
     end
-    
-    def add_route(method, route, options, block) 
+
+    def add_route(method, route, options, block)
       identifier = options[:identifier]
       route = append_to_path(route)
       block = add_filters_to_block(block, identifier, method)
@@ -178,7 +164,7 @@ module Bebop
 
     def route_helper(identifier)
       helper_tokens = (@parent_resources.dup << @current_resource) << identifier
-      "#{helper_tokens.join('_')}_path".to_sym
+      "#{helper_tokens.compact.join('_')}_path".to_sym
     end
 
     def add_filters_to_block(block, identifier, method)
