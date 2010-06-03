@@ -44,6 +44,11 @@ describe Bebop do
     last_response.body.should include('Bebop::InvalidPathArgumentError')
   end
 
+  it "should provide route helpers outside the resource block" do
+    get '/outside'
+    last_response.body.should include('/foos/1/bars/2')
+  end
+
   it "should define a route with new for the new method" do
     get '/foos/new'
     last_response.body.should == "new"
@@ -159,6 +164,10 @@ describe Bebop do
   AFTER_VALUE = '__after__'
 
   def use_bebop
+    @class.get '/outside' do
+      foo_bars_update_path(1,2)
+    end
+
     @class.resource :foos do |foo|
 
       foo.before :all do

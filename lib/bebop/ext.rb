@@ -1,7 +1,35 @@
+# The module registered in the Sinatra::Base subclass
+#
+# # Basic use
+#
+# While bebop can be used in the global context and with a Sinatra::Base subclass, the later is preferred. Example:
+#
+#     class MyApp < Sinatra::Base
+#       register Bebop
+#     end
+#
+# With the above in place you can use the {Bebop#resource} method to begin nesting your routes. See {MyApp} for examples
+#
 module Bebop
+
+  # Used to report an invalid number of path arguments passed to route helpers defined by bebop
+  #
   class InvalidPathArgumentError < ArgumentError; end
+
   PARAM_REGEX = /:[a-zA-Z0-9_]+/
 
+  # Initial class level method registered with Sinatra::Base. A new {ResourceRouter} instance will be passed as
+  # a block parameter
+  #
+  #    class MyApp < Sinatra::Base
+  #      resource :foos do |foos|
+  #        # nest routes, create filters, etc
+  #      end
+  #    end
+  #
+  # @param [Symbol] name the name of the resource
+  # @param [Block] block the actions performed on the resource
+  # @return nil
   def resource(name, &block)
     resource = ResourceRouter.new
     resource.resource(name, &block)
@@ -12,6 +40,29 @@ module Bebop
     resource.print if ENV['PROUTES']
   end
 
+  # For each route defined in the {Bebop#resource} block that  provides the :identifier option
+  # (either explicitly or implicitly as is the case with the new, index, show etc methods)
+  # a route helper will be defined for use within other route blocks in the Sinatra application. Example:
+  #
+  #     class MyApp < Sinatra::Base
+  #       resource :foos do |foos|
+  #         foos.show do
+  #           # some action
+  #         end
+  #
+  #         foos.get '/bar' do
+  #           redirect foos_show_path(Foo.first)
+  #         end
+  #       end
+  #
+  #       get '/bak' { redirect foos_show_path(Foo.first) }
+  #     end
+  #
+  # In the example foos_show_path will use either the object or its to_param method to produce
+  # `/foos/1/bar` if in this case Foo.first.to_param was equal to 1 or Foo.first itself was equal to one
+  #
+  # @param [String, Symbol] helper the name of the helper method
+  # @param [String] route the route string where the parameters will be inserted
   def define_route_helper(helper, route)
     define_method helper do |*args|
       unless route.scan(PARAM_REGEX).length == args.length
@@ -60,7 +111,7 @@ module Bebop
     end
 
     def head(route, options={}, &block)
-      add_route(:head,  route, options,  block)
+      add_route(:head, route, options,  block)
     end
 
     def new(options={}, &block)
@@ -173,7 +224,7 @@ module Bebop
       Proc.new do
         before.each { |f| instance_eval( &f[:block] ) }
         result = instance_eval(&block)
-        after.each { |f| instance_eval(&f[:block]) }
+        after.each { |f| instance_eval( &f[:block] ) }
         result
       end
     end
