@@ -14,7 +14,7 @@ module Bebop
   # Used to report an invalid number of path arguments passed to route helpers defined by bebop
   class InvalidPathArgumentError < ArgumentError; end
 
-  PARAM_REGEX = /:[a-zA-Z0-9_]+/
+  PARAM_REGEX = /:[\w_]+/i
 
   # Initial class level method registered with Sinatra::Base. A new {ResourceRouter} instance will be passed as
   # a block parameter
@@ -38,7 +38,7 @@ module Bebop
     resource.print if ENV['PROUTES']
   end
 
-  # For each route defined in the {Bebop#resource} block that  provides the :identifier option
+  # For each route defined in the {Bebop#resource} block that  provides the :id option
   # (either explicitly or implicitly as is the case with the new, index, show etc methods)
   # a route helper will be defined for use within other route blocks in the Sinatra application. Example:
   #
@@ -114,7 +114,7 @@ module Bebop
     # Allows definition of routes in the same fashion as the vanilla sinatra DSL
     #
     # @param [String] route the route
-    # @param [Hash] options the options, including :identifier used in filter definition, that will be passed
+    # @param [Hash] options the options, including :id used in filter definition, that will be passed
     #                       to Sinatra
     # @param [Proc] block the proc to execute upon request
     def get(route, options={}, &block)
@@ -149,7 +149,7 @@ module Bebop
     #        foos.new {}
     #
     #        # GET /foos/new
-    #        foos.get('new', :identifier => :new){}
+    #        foos.get('new', :id => :new){}
     #      end
     #    end
     #
@@ -158,7 +158,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def new(options={}, &block)
-      get 'new', options.merge(:identifier => :new), &block
+      get 'new', options.merge(:id => :new), &block
     end
 
     # One of the custom route methods. Generally used for the creation of a resource. Example:
@@ -169,7 +169,7 @@ module Bebop
     #        foos.create {}
     #
     #        # POST /foos
-    #        foos.post('', :identifier => :create){}
+    #        foos.post('', :id => :create){}
     #      end
     #    end
     #
@@ -178,7 +178,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def create(options={}, &block)
-      post '' , options.merge(:identifier => :create), &block
+      post '' , options.merge(:id => :create), &block
     end
 
     # One of the custom route methods. Generally used to present information on altering a resource. Example:
@@ -189,7 +189,7 @@ module Bebop
     #        foos.edit {}
     #
     #        # GET /foos/:foo_id/edit
-    #        foos.get(':foo_id/edit', :identifier => :edit){}
+    #        foos.get(':foo_id/edit', :id => :edit){}
     #      end
     #    end
     #
@@ -198,7 +198,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def edit(options={}, &block)
-      get append_token(resource_identifier, 'edit') , options.merge(:identifier => :edit), &block
+      get append_token(resource_identifier, 'edit') , options.merge(:id => :edit), &block
     end
 
     # One of the custom route methods. Generally used for presenting a list of resources instances. Example:
@@ -209,7 +209,7 @@ module Bebop
     #        foos.index {}
     #
     #        # GET /foos
-    #        foos.get('', :identifier => :index){}
+    #        foos.get('', :id => :index){}
     #      end
     #    end
     #
@@ -218,7 +218,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def index(options={}, &block)
-      get '', options.merge(:identifier => :index), &block
+      get '', options.merge(:id => :index), &block
     end
 
     # One of the custom route methods. Generally used for presenting information on a resource instance. Example:
@@ -229,7 +229,7 @@ module Bebop
     #        foos.show {}
     #
     #        # GET /foos/:foos_id
-    #        foos.get(':foos_id', :identifier => :show){}
+    #        foos.get(':foos_id', :id => :show){}
     #
     #        # filter targetted at the following show route
     #        foos.before(:orly){}
@@ -245,7 +245,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def show(route=nil, options={}, &block)
-      get append_token(resource_identifier, (route || '').to_s), options.merge(:identifier => route || :show), &block
+      get append_token(resource_identifier, (route || '').to_s), options.merge(:id => route || :show), &block
     end
 
     # One of the custom route methods. Generally used for presenting information on the creation of a resource. Example:
@@ -256,7 +256,7 @@ module Bebop
     #        foos.destroy {}
     #
     #        # DELETE /foos/:foos_id
-    #        foos.delete(':foos_id', :identifier => :destroy){}
+    #        foos.delete(':foos_id', :id => :destroy){}
     #      end
     #    end
     #
@@ -265,7 +265,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def destroy(options={}, &block)
-      delete resource_identifier, options.merge(:identifier => :destroy), &block
+      delete resource_identifier, options.merge(:id => :destroy), &block
     end
 
     # One of the custom route methods. Generally used for altering a resource. Example:
@@ -276,7 +276,7 @@ module Bebop
     #        foos.put {}
     #
     #        # PUT /foos/:foos_id
-    #        foos.put('new', :identifier => :new){}
+    #        foos.put('new', :id => :new){}
     #      end
     #    end
     #
@@ -285,7 +285,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def update(options={}, &block)
-      put resource_identifier, options.merge(:identifier => :update), &block
+      put resource_identifier, options.merge(:id => :update), &block
     end
 
     # Before filters allow for the application of functionality across many routes
@@ -300,11 +300,11 @@ module Bebop
     #        foos.index {}
     #
     #        # GET /foos
-    #        foos.get('', :identifier => :index){}
+    #        foos.get('', :id => :index){}
     #      end
     #    end
     #
-    # As long as the route has defined an :identifier (the custom routes new, index, show, etc do this for you)
+    # As long as the route has defined an :id (the custom routes new, index, show, etc do this for you)
     # it can be targeted directly by a before filter. Both of the filters defined in the above example will apply to
     # both of the routes. You can also provide a list of identifiers of routes that you wish the filter to apply to.
     # If no identifier is defined the default is all.
@@ -387,20 +387,17 @@ module Bebop
     end
 
     def add_route(method, route, options, block)
-      identifier = options[:identifier]
-      route = append_to_path(route)
-      block = add_filters_to_block(block, identifier, method)
-      helper = route_helper(identifier)
+      identifier = options[:id]
 
       #Sinatra doesn't like the spurious options
-      options.delete(:identifier)
+      options.delete(:id)
 
       @routes << {
         :method => method,
-        :route => route,
+        :route => append_to_path(route),
         :options => options,
-        :block => block,
-        :helper => helper
+        :block => add_filters_to_block(block, identifier, method),
+        :helper => route_helper(identifier)
       }
     end
 

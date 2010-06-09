@@ -51,87 +51,87 @@ describe Bebop do
 
   it "should define a route with new for the new method" do
     get '/foos/new'
-    last_response.body.should == "new"
+    response_equal("new")
   end
 
   it "should define a route with an identifer and append edit for the edit method" do
     get '/foos/1/edit'
-    last_response.body.should == 'edit 1'
+    response_equal('edit 1')
   end
 
   it "shoud define a route with an identifer for show and recieve the proper parameters" do
     get '/foos/1/bars/2'
-    last_response.body.should == 'show 1 2'
+    response_equal('show 1 2')
   end
 
   it "should respond correctly when the route is consulted" do
     post '/foos'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
   end
 
   it "should call before and after blocks correctly based on the identifier" do
     put '/foos/1'
-    last_response.body.should match(/#{BEFORE_UPDATE}/)
+    response_match(/#{BEFORE_UPDATE}/)
 
     post '/foos'
-    last_response.body.should_not match(/#{BEFORE_UPDATE}/)
+    response_match(/#{BEFORE_UPDATE}/, :not)
   end
 
   it "should correctly append any vanilla sinatra method with the resource prefix" do
     get '/foos/arbitrary'
-    last_response.body.should == 'baz'
+    response_equal('baz')
   end
 
   it "should not call before and after blocks in a nested resource based on the identifer" do
     put '/foos/1/bars/1'
-    last_response.body.should_not match(/#{BEFORE_UPDATE}/)
+    response_match(/#{BEFORE_UPDATE}/, :not)
   end
 
   it "should call before and after all blocks on all resource routes" do
     put '/foos/1'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
 
     post '/foos'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
 
     get '/foos/1/bars'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
 
     delete '/foos/1/bars/1'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
 
     put '/foos/1/bars/1'
-    last_response.body.should match(/#{BEFORE_ALL}/)
+    response_match(/#{BEFORE_ALL}/)
   end
 
   it "should call before and after resource blocks only on the nested resource routes" do
     get '/foos/1/bars'
-    last_response.body.should match(/#{BEFORE_BARS}/)
+    response_match(/#{BEFORE_BARS}/)
 
     delete '/foos/1/bars/1'
-    last_response.body.should match(/#{BEFORE_BARS}/)
+    response_match(/#{BEFORE_BARS}/)
   end
 
   it "should not call before and after resource blocks on non nested resource blocks" do
     post '/foos'
-    last_response.body.should_not match(/#{BEFORE_BARS}/)
+    response_match(/#{BEFORE_BARS}/, :not)
   end
 
   it "should call before and after filters without any identifier specified before all routes" do
     put '/foos/1'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
 
     post '/foos'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
 
     get '/foos/1/bars'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
 
     delete '/foos/1/bars/1'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
 
     put '/foos/1/bars/1'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
   end
 
   it "should call before and after filters that specify multiple identifiers before the proper routes" do
@@ -142,19 +142,34 @@ describe Bebop do
     TestClass.global.should == AFTER_VALUE
   end
 
-  it "should not call before and after filters that specify multiple parameters on anything else" do
-    get '/foos/new'
-    TestClass.global = nil
-  end
-
   it "should not prepend previous nested routes on non nested routes that follow" do
     get '/foos/do/something'
-    last_response.body.should == 'success'
+    response_match(/success/)
   end
 
   it "should produce correct routes for more than 2 levels of nesting" do
     get '/foos/1/bars/2/bazs'
-    last_response.body.should match(/#{BEFORE_ALL_2}/)
+    response_match(/#{BEFORE_ALL_2}/)
+  end
+  
+  context "targeted filters" do
+    it "should run targetted before filters with the proper id specified" do
+      get '/foos/bak_filter_target'
+      response_equal('bak')
+    end
+    
+    it "should not run filters for other routes that follow the filter" do
+      get '/foos/not_bak_filter_target'
+      response_match(/bak/, :not)
+    end
+  end
+
+  def response_match(regex, mod=nil)
+    last_response.body.send("should#{mod ? '_' + mod.to_s : ''}", match(regex))
+  end
+
+  def response_equal(string)
+    last_response.body.should == string
   end
 
   BEFORE_BARS = '__before_bars__'
@@ -219,6 +234,13 @@ describe Bebop do
       foo.get '/exception' do
         foos_bars_update_path(1)
       end
+
+      foo.before :bak_filter_target do
+        @bak = 'bak'
+      end
+
+      foo.get('/bak_filter_target', :id => :bak_filter_target) { @bak }      
+      foo.get('/not_bak_filter_target', :id => :not_bak_filter_target) { @bak } 
     end
   end
 end
