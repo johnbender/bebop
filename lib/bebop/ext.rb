@@ -36,6 +36,7 @@ module Bebop
       define_route_helper(route[:helper], route[:route]) if route[:helper]
     end
     resource.print if ENV['PROUTES']
+    resource.routes
   end
 
   # For each route defined in the {Bebop#resource} block that  provides the :id option

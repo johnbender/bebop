@@ -33,7 +33,7 @@ Requires rspec version 1.2.9 or higher
 sample
 ------
 
-If you were using an Active Record model Foo:
+If you wanted to expose the resource foo (in this case Foo is implemented as an AR model):
 
 	require 'bebop'
 	require 'sinatra'
