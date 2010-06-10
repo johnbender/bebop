@@ -17,7 +17,7 @@ require 'sinatra/base'
 #        end
 #
 #        # To have your filter run before a specific route, the route must be one of the seven helper
-#        # routes (see example/routes.rb) or specify the :identifier parameter
+#        # routes (see example/routes.rb) or specify the :id parameter
 #        #
 #        foos.before :new do
 #          @new = 'new'
@@ -27,10 +27,10 @@ require 'sinatra/base'
 #          "#{@all} #{@new}" # => 'all new'
 #        end
 #
-#        # You can target the vanila methods by providing the :identifier hash option
+#        # You can target the vanila methods by providing the :id hash option
 #        #
 #        # GET /foos/baz
-#        foos.get '/baz', :identifier => :new do
+#        foos.get '/baz', :id => :new do
 #          @new # => 'new'
 #        end
 #
@@ -56,8 +56,8 @@ require 'sinatra/base'
 #          @bak_baz = "bak 'n' baz"
 #        end
 #
-#        foos.get('/something', :identifier => :bak) { @bak_baz }
-#        foos.get('/anything', :identifier => :baz) { @bak_baz }
+#        foos.get('/something', :id => :bak) { @bak_baz }
+#        foos.get('/anything', :id => :baz) { @bak_baz }
 #      end
 #    end
 class FiltersApp < Sinatra::Base
@@ -74,7 +74,7 @@ class FiltersApp < Sinatra::Base
     end
 
     # To have your filter run before a specific route, the route must be one of the seven helper
-    # routes (see example/routes.rb) or specify the :identifier parameter
+    # routes (see example/routes.rb) or specify the :id parameter
     #
     foos.before :new do
       @new = 'new'
@@ -84,10 +84,10 @@ class FiltersApp < Sinatra::Base
       "#{@all} #{@new}" # => 'all new'
     end
 
-    # You can target the vanila methods by providing the :identifier hash option
+    # You can target the vanila methods by providing the :id hash option
     #
     # GET /foos/baz
-    foos.get '/baz', :identifier => :new do
+    foos.get '/baz', :id => :new do
       @new # => 'new'
     end
 
@@ -113,8 +113,8 @@ class FiltersApp < Sinatra::Base
       @bak_baz = "bak 'n' baz"
     end
 
-    foos.get('/something', :identifier => :bak) { @bak_baz }
-    foos.get('/anything', :identifier => :baz) { @bak_baz }
+    foos.get('/something', :id => :bak) { @bak_baz }
+    foos.get('/anything', :id => :baz) { @bak_baz }
   end
 end
 
