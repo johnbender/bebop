@@ -16,7 +16,7 @@ install
 -------
 
 Make sure you have gemcutter.org as one of your sources:
-     
+
     gem sources -a http://gemcutter.org
 
 Then:
@@ -25,7 +25,7 @@ Then:
 
 verify
 ------
-	
+
 Requires rspec version 1.2.9 or higher
 
 	cd /path/to/bebop; spec spec
@@ -40,10 +40,10 @@ If you wanted to expose the resource foo (in this case Foo is implemented as an 
 	require 'foo'
 
 	class MyApp < Sinatra::Base
-	  register Bebop	
-	  
+	  register Bebop
+
 	  resource :foos do |foos|
-	    
+
 	    # GET /foos/:foo_id
 	    foos.show do
 	      @foo = Foo.find(params[:foo_id])
@@ -65,11 +65,13 @@ See the examples directory. You can play with each of the examples as follows:
 
     $ pwd
 	/path/to/bebop
-	$ ruby examples/routes.rb 
+	$ ruby examples/routes.rb
 	== Sinatra/0.9.4 has taken the stage on 4567 for development with backup from Thin
 	>> Thin web server (v1.2.4 codename Flaming Astroboy)
 	>> Maximum connections set to 1024
 	>> Listening on 0.0.0.0:4567, CTRL+C to stop
+
+[Full documentation](http://johnbender.github.com/bebop/) also available.
 
 routes
 ------
@@ -77,13 +79,13 @@ routes
 Run your sinatra/monk app with the PROUTES env variable set to view the routes created with the resource method
 
 	$ ruby my_app.rb PROUTES=true
-	
-or 
+
+or
 
 	$ thor monk:start PROUTES=true
 
 NOTE: planning to change the formatting soon, as it currently sucks
-	
+
 license
 -------
 
