@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf8" />
+<title>Module: Bebop</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (B)</a> &raquo; 
+    
+    
+    <span class="title">Bebop</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Bebop 
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/bebop/ext.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+The module registered in the Sinatra::Base subclass
+</p>
+<p>
+# Basic use
+</p>
+<p>
+While bebop can be used in the global context and with a Sinatra::Base
+subclass, the later is preferred. Example:
+</p>
+<pre class="code">
+    <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+      <span class='register identifier id'>register</span> <span class='Bebop constant id'>Bebop</span>
+    <span class='end end kw'>end</span>
+</pre>
+<p>
+With the above in place you can use the <tt><a href="#resource-instance_method" title="Bebop#resource (method)">Bebop#resource</a></tt> method to begin
+nesting your routes. See <tt><a href="RoutesApp.html" title="RoutesApp (class)">RoutesApp</a></tt> for examples
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+   
+    
+      <strong class="classes">Classes:</strong> <a href="Bebop/InvalidPathArgumentError.html" title="Bebop::InvalidPathArgumentError (class)">InvalidPathArgumentError</a>, <a href="Bebop/ResourceRouter.html" title="Bebop::ResourceRouter (class)">ResourceRouter</a>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="PARAM_REGEX-constant" class="">PARAM_REGEX =
+          
+        </dt>
+        <dd><pre class="code"><span class='regexp val'>/:[\w_]+/i</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+    <h2>Instance Method Summary</h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#define_route_helper-instance_method" title="#define_route_helper (instance method)">- (Object) <strong>define_route_helper</strong>(helper, route) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+For each route defined in the <tt><a href="#resource-instance_method" title="Bebop#resource (method)">Bebop#resource</a></tt> block that provides the :id
+option (either explicitly or implicitly as is the case with the new, index,
+show etc methods) a route helper will be defined for use within other route
+blocks in the Sinatra application.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource-instance_method" title="#resource (instance method)">- (Object) <strong>resource</strong>(name, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Initial class level method registered with Sinatra::Base.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="define_route_helper-instance_method">
+  
+    - (<tt>Object</tt>) <strong>define_route_helper</strong>(helper, route) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+For each route defined in the <tt><a href="#resource-instance_method" title="Bebop#resource (method)">Bebop#resource</a></tt> block that provides the :id
+option (either explicitly or implicitly as is the case with the new, index,
+show etc methods) a route helper will be defined for use within other route
+blocks in the Sinatra application. Example:
+</p>
+<pre class="code">
+    <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+      <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+        <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='show identifier id'>show</span> <span class='do do kw'>do</span>
+          <span class='comment val'># some action</span>
+        <span class='end end kw'>end</span>
+
+        <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/bar'</span> <span class='do do kw'>do</span>
+          <span class='redirect identifier id'>redirect</span> <span class='foos_show_path identifier id'>foos_show_path</span><span class='lparen token'>(</span><span class='Foo constant id'>Foo</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='rparen token'>)</span>
+        <span class='end end kw'>end</span>
+      <span class='end end kw'>end</span>
+
+      <span class='get identifier id'>get</span> <span class='string val'>'/bak'</span> <span class='lbrace token'>{</span> <span class='redirect identifier id'>redirect</span> <span class='foos_show_path identifier id'>foos_show_path</span><span class='lparen token'>(</span><span class='Foo constant id'>Foo</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+    <span class='end end kw'>end</span>
+</pre>
+<p>
+In the example foos_show_path will use either the object or its to_param
+method to produce `/foos/1/bar` if in this case Foo.first.to_param was
+equal to 1 or Foo.first itself was equal to one
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>helper</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the name of the helper method
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>route</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the route string where the parameters will be inserted
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Proc
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 66</span>
+
+<span class='def def kw'>def</span> <span class='define_route_helper identifier id'>define_route_helper</span><span class='lparen token'>(</span><span class='helper identifier id'>helper</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='rparen token'>)</span>
+  <span class='define_method identifier id'>define_method</span> <span class='helper identifier id'>helper</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='mult op'>*</span><span class='args identifier id'>args</span><span class='bitor op'>|</span>
+    <span class='unless unless kw'>unless</span> <span class='route identifier id'>route</span><span class='dot token'>.</span><span class='scan identifier id'>scan</span><span class='lparen token'>(</span><span class='PARAM_REGEX constant id'>PARAM_REGEX</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='length identifier id'>length</span> <span class='eq op'>==</span> <span class='args identifier id'>args</span><span class='dot token'>.</span><span class='length identifier id'>length</span>
+      <span class='raise identifier id'>raise</span> <span class='InvalidPathArgumentError constant id'>InvalidPathArgumentError</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='dstring node'>&quot;invalid number of parameters #{args.length} for: #{route}&quot;</span><span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+
+    <span class='args identifier id'>args</span><span class='dot token'>.</span><span class='inject identifier id'>inject</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='acc identifier id'>acc</span><span class='comma token'>,</span> <span class='arg identifier id'>arg</span><span class='bitor op'>|</span>
+      <span class='comment val'>#handle fixnums and ar objects</span>
+      <span class='final_argument identifier id'>final_argument</span> <span class='assign token'>=</span> <span class='arg identifier id'>arg</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span><span class='lparen token'>(</span><span class='symbol val'>:to_param</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='arg identifier id'>arg</span><span class='dot token'>.</span><span class='to_param identifier id'>to_param</span> <span class='colon op'>:</span> <span class='arg identifier id'>arg</span>
+      <span class='acc identifier id'>acc</span><span class='dot token'>.</span><span class='sub! fid id'>sub!</span><span class='lparen token'>(</span><span class='PARAM_REGEX constant id'>PARAM_REGEX</span><span class='comma token'>,</span> <span class='final_argument identifier id'>final_argument</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="resource-instance_method">
+  
+    - (<tt>Object</tt>) <strong>resource</strong>(name, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Initial class level method registered with Sinatra::Base. A new
+<tt><a href="Bebop/ResourceRouter.html" title="Bebop::ResourceRouter (class)">ResourceRouter</a></tt> instance will be passed as a block parameter
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># nest routes, create filters, etc</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>name</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the name of the resource
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the actions performed on the resource
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+nil
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 31</span>
+
+<span class='def def kw'>def</span> <span class='resource identifier id'>resource</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='resource identifier id'>resource</span> <span class='assign token'>=</span> <span class='ResourceRouter constant id'>ResourceRouter</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='resource identifier id'>resource</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='routes identifier id'>routes</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='route identifier id'>route</span><span class='bitor op'>|</span>
+    <span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:method</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:route</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:options</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:block</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+    <span class='define_route_helper identifier id'>define_route_helper</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:helper</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:route</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='route identifier id'>route</span><span class='lbrack token'>[</span><span class='symbol val'>:helper</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='print identifier id'>print</span> <span class='if if_mod kw'>if</span> <span class='ENV constant id'>ENV</span><span class='lbrack token'>[</span><span class='string val'>'PROUTES'</span><span class='rbrack token'>]</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='routes identifier id'>routes</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Jun  9 23:33:59 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

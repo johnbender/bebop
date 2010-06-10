@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf8" />
+<title>Documentation by YARD 0.5.4</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Bebop</h1>
+
+<p>Bebop is small Sinatra/Monk extension for DRY resource based routing. It provides targeted filters, path helpers, nested resources, printable routing information, and familiar action methods like new, show, destroy, update, and index.</p>
+
+<p>The name comes from its happy partnering with the <a href="http://monkrb.com">Monk</a> glue framework, as Thelonius Monk is considered to be the father of bebop.</p>
+
+<h2>dependencies</h2>
+
+<ul>
+<li>Sinatra</li>
+<li>ActiveSupport</li>
+</ul>
+
+
+<h2>install</h2>
+
+<p>Make sure you have gemcutter.org as one of your sources:</p>
+
+<pre class="code"><span class='gem identifier id'>gem</span> <span class='sources identifier id'>sources</span> <span class='minus op'>-</span><span class='a identifier id'>a</span> <span class='http identifier id'>http</span><span class='symbol val'>:/</span><span class='regexp val'>/gemcutter.org
+</span></pre>
+
+<p>Then:</p>
+
+<pre class="code"><span class='gem identifier id'>gem</span> <span class='install identifier id'>install</span> <span class='bebop identifier id'>bebop</span>
+</pre>
+
+<h2>verify</h2>
+
+<p>Requires rspec version 1.2.9 or higher</p>
+
+<pre class="code"><span class='cd identifier id'>cd</span> <span class='regexp val'>/path/</span><span class='to identifier id'>to</span><span class='div op'>/</span><span class='bebop identifier id'>bebop</span><span class='semicolon token'>;</span> <span class='spec identifier id'>spec</span> <span class='spec identifier id'>spec</span>
+</pre>
+
+<h2>sample</h2>
+
+<p>If you wanted to expose the resource foo (in this case Foo is implemented as an AR model):</p>
+
+<pre class="code"><span class='require identifier id'>require</span> <span class='string val'>'bebop'</span>
+<span class='require identifier id'>require</span> <span class='string val'>'sinatra'</span>
+<span class='require identifier id'>require</span> <span class='string val'>'foo'</span>
+
+<span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+  <span class='register identifier id'>register</span> <span class='Bebop constant id'>Bebop</span>    
+
+  <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+
+    <span class='comment val'># GET /foos/:foo_id</span>
+    <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='show identifier id'>show</span> <span class='do do kw'>do</span>
+      <span class='@foo ivar id'>@foo</span> <span class='assign token'>=</span> <span class='Foo constant id'>Foo</span><span class='dot token'>.</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:foo_id</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+      <span class='haml identifier id'>haml</span> <span class='symbol val'>:'foos/show'</span>
+    <span class='end end kw'>end</span>
+
+    <span class='comment val'># GET /foos/new</span>
+    <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span>
+      <span class='@foo ivar id'>@foo</span> <span class='assign token'>=</span> <span class='Foo constant id'>Foo</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+      <span class='haml identifier id'>haml</span> <span class='symbol val'>:'foos/new'</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+
+<h2>more detail</h2>
+
+<p>See the examples directory. You can play with each of the examples as follows:</p>
+
+<pre class="code">$ <span class='pwd identifier id'>pwd</span>
+<span class='regexp val'>/path/</span><span class='to identifier id'>to</span><span class='div op'>/</span><span class='bebop identifier id'>bebop</span>
+$ <span class='ruby identifier id'>ruby</span> <span class='examples identifier id'>examples</span><span class='div op'>/</span><span class='routes identifier id'>routes</span><span class='dot token'>.</span><span class='rb identifier id'>rb</span> 
+<span class='eq op'>==</span> <span class='Sinatra constant id'>Sinatra</span><span class='div op'>/</span><span class='integer val'>0</span><span class='float val'>.9.4</span> <span class='has identifier id'>has</span> <span class='taken identifier id'>taken</span> <span class='the identifier id'>the</span> <span class='stage identifier id'>stage</span> <span class='on identifier id'>on</span> <span class='integer val'>4567</span> <span class='for for kw'>for</span> <span class='development identifier id'>development</span> <span class='with identifier id'>with</span> <span class='backup identifier id'>backup</span> <span class='from identifier id'>from</span> <span class='Thin constant id'>Thin</span>
+<span class='rshft op'>&gt;&gt;</span> <span class='Thin constant id'>Thin</span> <span class='web identifier id'>web</span> <span class='server identifier id'>server</span> <span class='lparen token'>(</span><span class='v1 identifier id'>v1</span><span class='float val'>.2.4</span> <span class='codename identifier id'>codename</span> <span class='Flaming constant id'>Flaming</span> <span class='Astroboy constant id'>Astroboy</span><span class='rparen token'>)</span>
+<span class='rshft op'>&gt;&gt;</span> <span class='Maximum constant id'>Maximum</span> <span class='connections identifier id'>connections</span> <span class='set identifier id'>set</span> <span class='to identifier id'>to</span> <span class='integer val'>1024</span>
+<span class='rshft op'>&gt;&gt;</span> <span class='Listening constant id'>Listening</span> <span class='on identifier id'>on</span> <span class='integer val'>0</span><span class='float val'>.0.0</span><span class='integer val'>.0</span><span class='symbol val'>:4567</span><span class='comma token'>,</span> <span class='CTRL constant id'>CTRL</span><span class='plus op'>+</span><span class='C constant id'>C</span> <span class='to identifier id'>to</span> <span class='stop identifier id'>stop</span>
+</pre>
+
+<h2>routes</h2>
+
+<p>Run your sinatra/monk app with the PROUTES env variable set to view the routes created with the resource method</p>
+
+<pre class="code">$ <span class='ruby identifier id'>ruby</span> <span class='my_app identifier id'>my_app</span><span class='dot token'>.</span><span class='rb identifier id'>rb</span> <span class='PROUTES constant id'>PROUTES</span><span class='assign token'>=</span><span class='true true kw'>true</span>
+</pre>
+
+<p>or</p>
+
+<pre class="code">$ <span class='thor identifier id'>thor</span> <span class='monk identifier id'>monk</span><span class='symbol val'>:start</span> <span class='PROUTES constant id'>PROUTES</span><span class='assign token'>=</span><span class='true true kw'>true</span>
+</pre>
+
+<p>NOTE: planning to change the formatting soon, as it currently sucks</p>
+
+<h2>license</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2010 FIX</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></div></div>
+    
+    <div id="footer">
+  Generated on Wed Jun  9 23:33:58 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

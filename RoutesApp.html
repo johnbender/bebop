@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf8" />
+<title>Class: RoutesApp</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo; 
+    
+    
+    <span class="title">RoutesApp</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: RoutesApp 
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Sinatra::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sinatra::Base</li>
+          
+            <li class="next">RoutesApp</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">examples/routes.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Examples of route definitions, helpers and special route methods
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='RoutesApp constant id'>RoutesApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='register identifier id'>register</span> <span class='Bebop constant id'>Bebop</span>
+
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+
+       <span class='comment val'># Any of the traditional sinatra methods called on the block parameter</span>
+       <span class='comment val'># will take the first argument (or an empty string) and apply it to</span>
+       <span class='comment val'># the resource base</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># GET /foos/baz</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/baz'</span> <span class='do do kw'>do</span>
+         <span class='string val'>'baz'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># There are 7 helper methods for the traditional resource actions. They</span>
+       <span class='comment val'># are index, new, create, update, edit, destroy, and show. Each is a wrapper</span>
+       <span class='comment val'># for the corresponding Sinatra method</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># GET /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='index identifier id'>index</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># For actions that require parameters the parameter name is derived from the singularized</span>
+       <span class='comment val'># name of the resource with '_id' appended.</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># GET /foos/:foo_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='show identifier id'>show</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/new</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># POST /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='create identifier id'>create</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># PUT /foos/:foo_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='update identifier id'>update</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/:foo_id/edit</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='edit identifier id'>edit</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># DELETE /foos/:foo_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='destroy identifier id'>destroy</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># For each of the helper methods, and any generic method (eg foos.get) that specifies the :id</span>
+       <span class='comment val'># option, bebop will define a relative path helper. See the nested resource below for the nameing of those</span>
+       <span class='comment val'># methods</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># GET /foos/do/redirect</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'do/redirect'</span> <span class='do do kw'>do</span>
+         <span class='comment val'># Redirects to /foos/1</span>
+         <span class='redirect identifier id'>redirect</span> <span class='foos_show_path identifier id'>foos_show_path</span><span class='lparen token'>(</span><span class='integer val'>1</span><span class='rparen token'>)</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># If you want to represent the relationship of your models through nested resources use</span>
+       <span class='comment val'># the resource method with the block parameter and all new routes will be nested and</span>
+       <span class='comment val'># parameterized properly</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># Prefix all with /foos/:foo_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='resource identifier id'>resource</span> <span class='symbol val'>:bars</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='bars identifier id'>bars</span><span class='bitor op'>|</span>
+
+         <span class='comment val'># GET /foos/:foo_id/bars/:bar_id/edit</span>
+         <span class='bars identifier id'>bars</span><span class='dot token'>.</span><span class='edit identifier id'>edit</span> <span class='do do kw'>do</span>
+           <span class='dstring node'>&quot;foo: #{params[:foo_id]} bar: #{params[:bar_id]}&quot;</span>
+         <span class='end end kw'>end</span>
+
+         <span class='bars identifier id'>bars</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/redirect'</span> <span class='do do kw'>do</span>
+
+           <span class='comment val'># The route helper method naming convention is simple and easy to remember as it follows</span>
+           <span class='comment val'># the order of nesting for the given route starting with the original parent resource and</span>
+           <span class='comment val'># ending with the method identifier.</span>
+           <span class='comment val'>#</span>
+           <span class='comment val'># Redirects to /foos/1/bars/2/edit</span>
+           <span class='redirect identifier id'>redirect</span> <span class='foos_bars_edit_path identifier id'>foos_bars_edit_path</span><span class='lparen token'>(</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='rparen token'>)</span>
+         <span class='end end kw'>end</span>
+       <span class='end end kw'>end</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+
+
+  
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Jun  9 23:33:58 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

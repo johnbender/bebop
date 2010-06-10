@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf8" />
+<title>Class: FiltersApp</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (F)</a> &raquo; 
+    
+    
+    <span class="title">FiltersApp</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FiltersApp 
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Sinatra::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sinatra::Base</li>
+          
+            <li class="next">FiltersApp</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">examples/filters.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Examples of filter use
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='FiltersApp constant id'>FiltersApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='register identifier id'>register</span> <span class='Bebop constant id'>Bebop</span>
+
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># Bebop provides some simple targeting for before and after filters, with the</span>
+       <span class='comment val'># caveat that they must be defined before the routes they target within the resource block</span>
+       <span class='comment val'># To have your filter run before all routes under a given resource and its child resources</span>
+       <span class='comment val'># pass :all as the first parameter</span>
+       <span class='comment val'>#</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='before identifier id'>before</span> <span class='symbol val'>:all</span> <span class='do do kw'>do</span>
+         <span class='@all ivar id'>@all</span> <span class='assign token'>=</span> <span class='string val'>'all'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># To have your filter run before a specific route, the route must be one of the seven helper</span>
+       <span class='comment val'># routes (see example/routes.rb) or specify the :id parameter</span>
+       <span class='comment val'>#</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='before identifier id'>before</span> <span class='symbol val'>:new</span> <span class='do do kw'>do</span>
+         <span class='@new ivar id'>@new</span> <span class='assign token'>=</span> <span class='string val'>'new'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span>
+         <span class='dstring node'>&quot;#{@all} #{@new}&quot;</span> <span class='comment val'># =&gt; 'all new'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># You can target the vanila methods by providing the :id hash option</span>
+       <span class='comment val'>#</span>
+       <span class='comment val'># GET /foos/baz</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/baz'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:new</span> <span class='do do kw'>do</span>
+         <span class='@new ivar id'>@new</span> <span class='comment val'># =&gt; 'new'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># You can also specify a before filter for nested routes by using the child resource name</span>
+       <span class='comment val'>#</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='before identifier id'>before</span> <span class='symbol val'>:bars</span> <span class='do do kw'>do</span>
+         <span class='@bars ivar id'>@bars</span> <span class='assign token'>=</span> <span class='string val'>'some bars'</span>
+       <span class='end end kw'>end</span>
+
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='resource identifier id'>resource</span> <span class='symbol val'>:bars</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='bars identifier id'>bars</span><span class='bitor op'>|</span>
+         <span class='bars identifier id'>bars</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/some_bars'</span> <span class='do do kw'>do</span>
+           <span class='@bars ivar id'>@bars</span> <span class='comment val'># =&gt; 'some bars'</span>
+         <span class='end end kw'>end</span>
+       <span class='end end kw'>end</span>
+
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span> <span class='string val'>'/bak'</span> <span class='do do kw'>do</span>
+         <span class='@bars ivar id'>@bars</span> <span class='comment val'># =&gt; nil</span>
+       <span class='end end kw'>end</span>
+
+       <span class='comment val'># Finally you can specify many different methods in your filters by passing many identifiers</span>
+       <span class='comment val'>#</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='before identifier id'>before</span> <span class='symbol val'>:bak</span><span class='comma token'>,</span> <span class='symbol val'>:baz</span> <span class='do do kw'>do</span>
+         <span class='@bak_baz ivar id'>@bak_baz</span> <span class='assign token'>=</span> <span class='string val'>&quot;bak 'n' baz&quot;</span>
+       <span class='end end kw'>end</span>
+
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'/something'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:bak</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='@bak_baz ivar id'>@bak_baz</span> <span class='rbrace token'>}</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'/anything'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:baz</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='@bak_baz ivar id'>@bak_baz</span> <span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+
+
+  
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Jun  9 23:33:58 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,2186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf8" />
+<title>Class: Bebop::ResourceRouter</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><a href="../Bebop.html" title="Bebop (module)">Bebop</a></span>
+     &raquo; 
+    <span class="title">ResourceRouter</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Bebop::ResourceRouter 
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Bebop::ResourceRouter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/bebop/ext.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of this class is yielded to the blocks passed to
+<tt><a href="../Bebop.html#resource-instance_method" title="Bebop#resource (method)">Bebop#resource</a></tt> method and its own <tt><a href="#resource-instance_method" title="Bebop::ResourceRouter#resource (method)">ResourceRouter#resource</a></tt> method.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="logger-classvariable" class="">@@logger =
+          
+        </dt>
+        <dd><pre class="code"><span class='Logger constant id'>Logger</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='STDOUT constant id'>STDOUT</span><span class='rparen token'>)</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  <h2>Instance Attribute Summary</h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#routes-instance_method" title="#routes (instance method)">- (Object) <strong>routes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A container for the routes arrays.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>Class Method Summary</h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-class_method" title="logger (class method)">+ (Logger) <strong>logger</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Provides access to logger used to display routing information.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger%3D-class_method" title="logger= (class method)">+ (Logger) <strong>logger</strong>(val) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Allows the user to define a new logger for displaying routing information.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>Instance Method Summary</h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#after-instance_method" title="#after (instance method)">- (Object) <strong>after</strong>(*params, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+After filters behave in the same manner as before filters save that they
+are executed after the route block.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#before-instance_method" title="#before (instance method)">- (Object) <strong>before</strong>(*params, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Before filters allow for the application of functionality across many
+routes.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">- (Object) <strong>delete</strong>(route, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">- (Object) <strong>destroy</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit-instance_method" title="#edit (instance method)">- (Object) <strong>edit</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-instance_method" title="#get (instance method)">- (Object) <strong>get</strong>(route, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Allows definition of routes in the same fashion as the vanilla sinatra DSL.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#head-instance_method" title="#head (instance method)">- (Object) <strong>head</strong>(route, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Object) <strong>index</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ResourceRouter) <strong>initialize</strong>(parent_resources = [], before_all = [], after_all = []) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+When an instance is created the parent resources and filters covering all
+routes are used to create path definitions, helpers and properly filtered
+blocks.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#post-instance_method" title="#post (instance method)">- (Object) <strong>post</strong>(route, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print-instance_method" title="#print (instance method)">- (Object) <strong>print</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Used to print all the routes for a given router instance and its children.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#put-instance_method" title="#put (instance method)">- (Object) <strong>put</strong>(route, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource-instance_method" title="#resource (instance method)">- (Object) <strong>resource</strong>(name, &amp;block) {|router| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Nested resources can be defined by calling this method.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">- (Object) <strong>show</strong>(route = nil, options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+One of the custom route methods.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><a href="" title="Bebop::ResourceRouter (class)">ResourceRouter</a></tt>) <strong>initialize</strong>(parent_resources = [], before_all = [], after_all = []) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+When an instance is created the parent resources and filters covering all
+routes are used to create path definitions, helpers and properly filtered
+blocks
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <span class='name'>parent_resources</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+an array of the resources under which this new router will need to nest
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <span class='name'>before_all</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+an array of the filters that must be applied before all route blocks are
+executed
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <span class='name'>after_all</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+an array of the filters that must be applied after all route blocks are
+executed
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 109</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='parent_resources identifier id'>parent_resources</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='before_all identifier id'>before_all</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='after_all identifier id'>after_all</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+  <span class='@current_resource ivar id'>@current_resource</span> <span class='assign token'>=</span> <span class='parent_resources identifier id'>parent_resources</span><span class='dot token'>.</span><span class='pop identifier id'>pop</span>
+  <span class='@parent_resources ivar id'>@parent_resources</span> <span class='assign token'>=</span> <span class='parent_resources identifier id'>parent_resources</span>
+  <span class='@before ivar id'>@before</span><span class='comma token'>,</span> <span class='@after ivar id'>@after</span><span class='comma token'>,</span> <span class='@routes ivar id'>@routes</span> <span class='assign token'>=</span> <span class='before_all identifier id'>before_all</span><span class='comma token'>,</span> <span class='after_all identifier id'>after_all</span><span class='comma token'>,</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="routes=-instance_method"></span>
+      <span id="routes-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="routes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>routes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A container for the routes arrays
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 84</span>
+
+<span class='def def kw'>def</span> <span class='routes identifier id'>routes</span>
+  <span class='@routes ivar id'>@routes</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="logger-class_method">
+  
+    + (<tt>Logger</tt>) <strong>logger</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Provides access to logger used to display routing information
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Logger</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 91</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span>
+  <span class='@@logger ivar id'>@@logger</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="logger=-class_method">
+  
+    + (<tt>Logger</tt>) <strong>logger=</strong>(val) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Allows the user to define a new logger for displaying routing information
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Logger</tt>)</span>
+      
+      
+        <span class='name'>val</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the logging mechanism to be used when priting routes
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Logger</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 99</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='logger identifier id'>logger</span><span class='assign token'>=</span><span class='lparen token'>(</span><span class='val identifier id'>val</span><span class='rparen token'>)</span>
+  <span class='@@logger ivar id'>@@logger</span> <span class='assign token'>=</span> <span class='val identifier id'>val</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="after-instance_method">
+  
+    - (<tt>Object</tt>) <strong>after</strong>(*params, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+After filters behave in the same manner as before filters save that they
+are executed after the route block. See <tt><a href="#before-instance_method" title="Bebop::ResourceRouter#before (method)">ResourceRouter#before</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+        <span class='name'>params</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the route identifiers to target
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute when targeted
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 326</span>
+
+<span class='def def kw'>def</span> <span class='after identifier id'>after</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='params identifier id'>params</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_filter identifier id'>add_filter</span><span class='lparen token'>(</span><span class='@after ivar id'>@after</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="before-instance_method">
+  
+    - (<tt>Object</tt>) <strong>before</strong>(*params, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Before filters allow for the application of functionality across many
+routes
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='symbol val'>:all</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='symbol val'>:index</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='index identifier id'>index</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>''</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:index</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+As long as the route has defined an :id (the custom routes new, index,
+show, etc do this for you) it can be targeted directly by a before filter.
+Both of the filters defined in the above example will apply to both of the
+routes. You can also provide a list of identifiers of routes that you wish
+the filter to apply to. If no identifier is defined the default is all.
+</p>
+<p>
+IMPORTANT: all filters must be defined before the routes they apply to.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+        <span class='name'>params</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the route identifiers to target
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute when targeted
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+317
+318
+319</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 317</span>
+
+<span class='def def kw'>def</span> <span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='params identifier id'>params</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_filter identifier id'>add_filter</span><span class='lparen token'>(</span><span class='@before ivar id'>@before</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for the creation of a
+resource. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># POST /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='create identifier id'>create</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># POST /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='string val'>''</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:create</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 181</span>
+
+<span class='def def kw'>def</span> <span class='create identifier id'>create</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='post identifier id'>post</span> <span class='string val'>''</span> <span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:create</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete</strong>(route, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 136</span>
+
+<span class='def def kw'>def</span> <span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_route identifier id'>add_route</span><span class='lparen token'>(</span><span class='symbol val'>:delete</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="destroy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>destroy</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for presenting information
+on the creation of a resource. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># DELETE /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='destroy identifier id'>destroy</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># DELETE /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='string val'>':foos_id'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:destroy</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+268
+269
+270</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 268</span>
+
+<span class='def def kw'>def</span> <span class='destroy identifier id'>destroy</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='delete identifier id'>delete</span> <span class='resource_identifier identifier id'>resource_identifier</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:destroy</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="edit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>edit</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used to present information on
+altering a resource. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># GET /foos/:foo_id/edit</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='edit identifier id'>edit</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/:foo_id/edit</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>':foo_id/edit'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:edit</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+201
+202
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 201</span>
+
+<span class='def def kw'>def</span> <span class='edit identifier id'>edit</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='get identifier id'>get</span> <span class='append_token identifier id'>append_token</span><span class='lparen token'>(</span><span class='resource_identifier identifier id'>resource_identifier</span><span class='comma token'>,</span> <span class='string val'>'edit'</span><span class='rparen token'>)</span> <span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:edit</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get</strong>(route, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Allows definition of routes in the same fashion as the vanilla sinatra DSL
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>route</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the route
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options, including :id used in filter definition, that will be passed
+to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 121</span>
+
+<span class='def def kw'>def</span> <span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_route identifier id'>add_route</span><span class='lparen token'>(</span><span class='symbol val'>:get</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="head-instance_method">
+  
+    - (<tt>Object</tt>) <strong>head</strong>(route, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 141</span>
+
+<span class='def def kw'>def</span> <span class='head identifier id'>head</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_route identifier id'>add_route</span><span class='lparen token'>(</span><span class='symbol val'>:head</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span>  <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Object</tt>) <strong>index</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for presenting a list of
+resources instances. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># GET /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='index identifier id'>index</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>''</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:index</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221
+222
+223</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 221</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='get identifier id'>get</span> <span class='string val'>''</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:index</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for presenting information
+on the creation of a resource. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># GET /foos/new</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/new</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'new'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:new</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 161</span>
+
+<span class='def def kw'>def</span> <span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='get identifier id'>get</span> <span class='string val'>'new'</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:new</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="post-instance_method">
+  
+    - (<tt>Object</tt>) <strong>post</strong>(route, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+131
+132
+133</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 131</span>
+
+<span class='def def kw'>def</span> <span class='post identifier id'>post</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_route identifier id'>add_route</span><span class='lparen token'>(</span><span class='symbol val'>:post</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="print-instance_method">
+  
+    - (<tt>Object</tt>) <strong>print</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Used to print all the routes for a given router instance and its children
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+360
+361
+362
+363
+364</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 360</span>
+
+<span class='def def kw'>def</span> <span class='print identifier id'>print</span>
+  <span class='@routes ivar id'>@routes</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='route identifier id'>route</span><span class='bitor op'>|</span>
+    <span class='@@logger ivar id'>@@logger</span><span class='dot token'>.</span><span class='info identifier id'>info</span> <span class='dstring node'>&quot;#{justify(route, :helper, :r)}\t#{justify(route, :method, :l).upcase}\t#{justify(route, :route, :l)}&quot;</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="put-instance_method">
+  
+    - (<tt>Object</tt>) <strong>put</strong>(route, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+See <tt><a href="#get-instance_method" title="Bebop::ResourceRouter#get (method)">ResourceRouter#get</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 126</span>
+
+<span class='def def kw'>def</span> <span class='put identifier id'>put</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='add_route identifier id'>add_route</span><span class='lparen token'>(</span><span class='symbol val'>:put</span><span class='comma token'>,</span> <span class='route identifier id'>route</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='comma token'>,</span> <span class='block identifier id'>block</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="resource-instance_method">
+  
+    - (<tt>Object</tt>) <strong>resource</strong>(name, &amp;block) {|router| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Nested resources can be defined by calling this method. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+
+       <span class='comment val'># GET /foos/bak</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'/bak'</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='resource identifier id'>resource</span> <span class='symbol val'>:bars</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='bars identifier id'>bars</span><span class='bitor op'>|</span>
+
+         <span class='comment val'># GET /foos/:foos_id/bars/bak</span>
+         <span class='bars identifier id'>bars</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>'/bak'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+       <span class='end end kw'>end</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+Bebop takes care of nesting the resources as you grown used to in
+frameworks like Rails.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>name</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the plural of the resource name
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the block of routes to nest under parent resources
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt>router</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+350
+351
+352
+353
+354
+355
+356
+357</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 350</span>
+
+<span class='def def kw'>def</span> <span class='resource identifier id'>resource</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='before_filters identifier id'>before_filters</span> <span class='assign token'>=</span> <span class='filters identifier id'>filters</span><span class='lparen token'>(</span><span class='@before ivar id'>@before</span><span class='comma token'>,</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='name identifier id'>name</span><span class='rparen token'>)</span>
+  <span class='after_filters identifier id'>after_filters</span> <span class='assign token'>=</span> <span class='filters identifier id'>filters</span><span class='lparen token'>(</span><span class='@after ivar id'>@after</span><span class='comma token'>,</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='name identifier id'>name</span><span class='rparen token'>)</span>
+
+  <span class='router identifier id'>router</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='all_resources identifier id'>all_resources</span> <span class='plus op'>+</span> <span class='lbrack token'>[</span><span class='name identifier id'>name</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='before_filters identifier id'>before_filters</span><span class='comma token'>,</span> <span class='after_filters identifier id'>after_filters</span><span class='rparen token'>)</span>
+  <span class='yield yield kw'>yield</span><span class='lparen token'>(</span><span class='router identifier id'>router</span><span class='rparen token'>)</span>
+  <span class='@routes ivar id'>@routes</span> <span class='opasgn op'>+=</span> <span class='router identifier id'>router</span><span class='dot token'>.</span><span class='routes identifier id'>routes</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show</strong>(route = nil, options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for presenting information
+on a resource instance. Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># GET /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='show identifier id'>show</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='get identifier id'>get</span><span class='lparen token'>(</span><span class='string val'>':foos_id'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:show</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># filter targetted at the following show route</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='symbol val'>:orly</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># GET /foos/:foos_id/orly</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='show identifier id'>show</span><span class='lparen token'>(</span><span class='symbol val'>:orly</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent.
+Additionally you can define extra routing information that will be appended
+to the route and used as the filter identifier see <tt><a href="#before-instance_method" title="Bebop::ResourceRouter#before (method)">ResourceRouter#before</a></tt>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+248
+249
+250</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 248</span>
+
+<span class='def def kw'>def</span> <span class='show identifier id'>show</span><span class='lparen token'>(</span><span class='route identifier id'>route</span><span class='assign token'>=</span><span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='get identifier id'>get</span> <span class='append_token identifier id'>append_token</span><span class='lparen token'>(</span><span class='resource_identifier identifier id'>resource_identifier</span><span class='comma token'>,</span> <span class='lparen token'>(</span><span class='route identifier id'>route</span> <span class='orop op'>||</span> <span class='string val'>''</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='route identifier id'>route</span> <span class='orop op'>||</span> <span class='symbol val'>:show</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong>(options = {}, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+One of the custom route methods. Generally used for altering a resource.
+Example:
+</p>
+<pre class="code">
+   <span class='class class kw'>class</span> <span class='MyApp constant id'>MyApp</span> <span class='lt op'>&lt;</span> <span class='Sinatra constant id'>Sinatra</span><span class='colon2 op'>::</span><span class='Base constant id'>Base</span>
+     <span class='resource identifier id'>resource</span> <span class='symbol val'>:foos</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='foos identifier id'>foos</span><span class='bitor op'>|</span>
+       <span class='comment val'># PUT /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='put identifier id'>put</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+
+       <span class='comment val'># PUT /foos/:foos_id</span>
+       <span class='foos identifier id'>foos</span><span class='dot token'>.</span><span class='put identifier id'>put</span><span class='lparen token'>(</span><span class='string val'>'new'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:new</span><span class='rparen token'>)</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+</pre>
+<p>
+The two route definitions in the above example are functionally equivalent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options hash that will be passed on to Sinatra
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+        <span class='name'>block</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the proc to execute upon request
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288
+289
+290</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bebop/ext.rb', line 288</span>
+
+<span class='def def kw'>def</span> <span class='update identifier id'>update</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
+  <span class='put identifier id'>put</span> <span class='resource_identifier identifier id'>resource_identifier</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:update</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Jun  9 23:33:58 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
