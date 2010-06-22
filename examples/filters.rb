@@ -100,6 +100,7 @@ class FiltersApp < Sinatra::Base
     foos.resource :bars do |bars|
       bars.get '/some_bars' do
         @bars # => 'some bars'
+        haml
       end
     end
 

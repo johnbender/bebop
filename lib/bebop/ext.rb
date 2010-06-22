@@ -390,14 +390,16 @@ module Bebop
     def add_route(method, route, options, block)
       identifier = options[:id]
 
-      #Sinatra doesn't like the spurious options
-      options.delete(:id)
+      # Sinatra doesn't like the spurious options, and we create a dup
+      # to preserve the options hash for testing (thanks destructive updates!)
+      opts = options.dup
+      opts.delete(:id)
 
       @routes << {
         :method => method,
         :route => append_to_path(route),
-        :options => options,
-        :block => add_filters_to_block(block, identifier, method),
+        :options => opts,
+        :block => filter_block(block, identifier, method),
         :helper => route_helper(identifier)
       }
     end
@@ -423,7 +425,7 @@ module Bebop
       "#{helper_tokens.compact.join('_')}_path".to_sym
     end
 
-    def add_filters_to_block(block, identifier, method)
+    def filter_block(block, identifier, method)
       before = filters(@before, identifier, method, :all, @current_resource)
       after = filters(@after, identifier, method, :all, @current_resource)
       Proc.new do

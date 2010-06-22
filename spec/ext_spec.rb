@@ -1,18 +1,12 @@
-require File.join(File.dirname(__FILE__), '..', 'lib', 'bebop')
-require 'rack/test'
-require 'sinatra/base'
-require 'ruby-debug'
+require 'spec_helper'
 
 describe Bebop do
   include Rack::Test::Methods
-
-  def app
-    @test_app ||= TestClass.new
-    @test_app
-  end
+  include RouteHelper
 
   before :each do
     TestClass.after = nil
+    @test_app = TestClass.new
   end
 
   it "should provide the correct relative url from the route helpers" do
@@ -133,16 +127,16 @@ describe Bebop do
     get '/foos/1/bars/2/bazs'
     response_equal "two levels of nesting"
   end
-  
+
   context "targeted filters" do
     it "should run targetted before filters with the proper id specified" do
       get '/foos/bak_filter_target'
       response_equal 'bak'
     end
-    
+
     it "should not run filters for other routes that follow the filter" do
       get '/foos/not_bak_filter_target'
-      response_not_match /bak/ 
+      response_not_match /bak/
     end
   end
 
@@ -163,7 +157,7 @@ end
 class TestClass < Sinatra::Base
   register Bebop
   set :show_exceptions, true
-  
+
   class << self
     def after
       @@after
@@ -205,7 +199,7 @@ class TestClass < Sinatra::Base
     foo.after :create, :update do
       @@after = AFTER_VALUE
     end
-    
+
     foo.get('/do/something') { 'success' }
 
     foo.get '/route_helper_test' do
@@ -222,7 +216,7 @@ class TestClass < Sinatra::Base
 
     foo.new { "new" }
     foo.edit { "edit #{params[:foo_id]}" }
-    
+
     foo.resource :bars do |bar|
       bar.index { "#{@all2}#{@all}#{@update}#{@bars}" }
       bar.update { "#{@all2}#{@all}#{@update}#{@bars}" }
@@ -239,8 +233,8 @@ class TestClass < Sinatra::Base
       @bak = 'bak'
     end
 
-    foo.get('/bak_filter_target', :id => :bak_filter_target) { @bak }      
-    foo.get('/not_bak_filter_target', :id => :not_bak_filter_target) { @bak } 
+    foo.get('/bak_filter_target', :id => :bak_filter_target) { @bak }
+    foo.get('/not_bak_filter_target', :id => :not_bak_filter_target) { @bak }
 
     foo.show { params[:foo_id] }
   end
