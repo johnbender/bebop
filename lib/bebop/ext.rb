@@ -35,6 +35,7 @@ module Bebop
       send(route[:method], route[:route], route[:options], &route[:block])
       define_route_helper(route[:helper], route[:route]) if route[:helper]
     end
+    # Switch to cvar Bebop.print_routes=true
     resource.print if ENV['PROUTES']
     resource.routes
   end
@@ -198,8 +199,8 @@ module Bebop
     #
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
-    def edit(options={}, &block)
-      get append_token(resource_identifier, 'edit') , options.merge(:id => :edit), &block
+    def edit(route=nil, options={}, &block)
+      get append_token(resource_identifier, (route || 'edit').to_s) , options.merge(:id => :edit), &block
     end
 
     # One of the custom route methods. Generally used for presenting a list of resources instances. Example:
@@ -246,7 +247,7 @@ module Bebop
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
     def show(route=nil, options={}, &block)
-      get append_token(resource_identifier, (route || '').to_s), options.merge(:id => route || :show), &block
+      get append_token(resource_identifier, route.to_s), options.merge(:id => route || :show), &block
     end
 
     # One of the custom route methods. Generally used for presenting information on the creation of a resource. Example:
@@ -265,8 +266,8 @@ module Bebop
     #
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
-    def destroy(options={}, &block)
-      delete resource_identifier, options.merge(:id => :destroy), &block
+    def destroy(route=nil, options={}, &block)
+      delete append_token(resource_identifier, route.to_s), options.merge(:id => route || :destroy), &block
     end
 
     # One of the custom route methods. Generally used for altering a resource. Example:
@@ -285,8 +286,8 @@ module Bebop
     #
     # @param [Hash] options the options hash that will be passed on to Sinatra
     # @param [Proc] block the proc to execute upon request
-    def update(options={}, &block)
-      put resource_identifier, options.merge(:id => :update), &block
+    def update(route=nil, options={}, &block)
+      put append_token(resource_identifier, route.to_s), options.merge(:id => route || :update), &block
     end
 
     # Before filters allow for the application of functionality across many routes

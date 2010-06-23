@@ -2,82 +2,127 @@ require 'spec_helper'
 
 describe "filters" do
   include RouteHelper
+  context "all" do
+    context "explicit" do
+      let(:value) { "explicit" }
 
-  context "before" do
-    module Before; end
-
-    context "all" do
-      context "and explicit" do
-        let(:string) { "explicit" }
-
-        it "should run for all routes" do
-          class Before::Explicit < Sinatra::Base; end
-          @routes = before_filter_setup(Before::Explicit, string, :all)
-          test_routes(@routes, string)
-        end
+      it "should run for all routes" do
+        class Explicit < Sinatra::Base; end
+        @class_const = Explicit
+        test_routes filter_setup(:filter_targets => [:all])
       end
 
-      context "implicit" do
-        let(:string) { "implicit" }
-
-        it "should run for all routes" do
-          class Before::Implicit < Sinatra::Base; end
-          @routes = before_filter_setup(Before::Implicit, string)
-          test_routes(@routes, string)
-        end
-      end
+      it "should run for nested routes"
     end
 
-    context "targeted at specific routes" do
-      let(:string) { "bar route" }
+    context "implicit" do
+      let(:value) { "implicit" }
 
-      it "should run on targeted routes" do
-        class Before::Targeted < Sinatra::Base; end
-
-        @routes = before_filter_setup(Before::Targeted, string, :foo, :id => :foo).select do |r|
-          r[:route] =~ /vanilla/ # id's are used with vanilla routing methods
-        end
-
-        test_routes(@routes, string)
+      it "should run for all routes" do
+        class Implicit < Sinatra::Base; end
+        @class_const = Implicit
+        test_routes filter_setup
       end
 
-      it "should not run on other routes" do
-        class Before::NotTargeted < Sinatra::Base; end
-        @routes = before_filter_setup(Before::NotTargeted, string, :fiz, :id => :foo)
-        test_routes(@routes, "")
-      end
-    end
-
-    def test_routes(routes, value)
-      routes.each do |route|
-        send(route[:method], route[:route]).body.should == value
-      end
-    end
-
-    def before_filter_setup(class_const, value, filter_target = nil, opts = {})
-      class_const.register Bebop
-
-      value_block = Proc.new { @value }
-      filter_block = Proc.new { @value = value }
-
-      routes = class_const.resource :foos do |foo|
-        if filter_target
-          foo.before filter_target, &filter_block
-        else
-          foo.before &filter_block
-        end
-
-        define_all_route_methods(foo, opts, &value_block)
-      end
-
-      @test_app = class_const.new
-      routes
+      it "should run for nested routes"
     end
   end
 
-  context "after" do
-    context "all" do
+  context "targeted at specific routes" do
+    let(:value) { "bar route" }
 
+    it "should run on those routes" do
+      class Targeted < Sinatra::Base; end
+      @class_const = Targeted
+      routes = filter_setup(:filter_targets => [:foo], :ids => [:foo]).select do |r|
+        r[:route] =~ /vanilla/
+      end
+
+      test_routes routes
     end
+
+    it "should not run on other routes" do
+      class NotTargeted < Sinatra::Base; end
+      @class_const = NotTargeted
+      routes = filter_setup(:filter_targets => [:fiz], :ids => [:not_fiz])
+      test_routes(routes, "")
+    end
+  end
+
+  context "targetted at many routes" do
+    let(:value) { "many targetted route" }
+
+    context "that are vanilla" do
+      it "should run on each route" do
+        class ManyVanillaTargetted < Sinatra::Base; end
+        @class_const = ManyVanillaTargetted
+
+        routes = filter_setup(:filter_targets => [:fiz, :bar], :ids => [:fiz, :bar]).select do |route|
+          route[:route] =~ /vanilla/
+        end
+
+        test_routes routes
+      end
+    end
+
+    context "that are special bebop routes" do
+      it "should run on each route" do
+        class ManySpecialTargetted < Sinatra::Base; end
+        @class_const = ManySpecialTargetted
+
+        special_routes = [:new, :create]
+        routes = filter_setup(:filter_targets => special_routes).select do |route|
+          route[:helper].to_s =~ /new/ || route[:helper].to_s =~ /create/
+        end
+
+        test_routes routes
+      end
+
+      it "should not run on other routes" do
+        class ManySpecialNotTargetted < Sinatra::Base; end
+        @class_const = ManySpecialNotTargetted
+
+        special_routes = [:new, :create]
+        routes = filter_setup(:filter_targets => special_routes).reject do |route|
+          route[:helper].to_s =~ /new/ || route[:helper].to_s =~ /create/
+        end
+
+        test_routes routes, ""
+      end
+    end
+  end
+
+  def test_routes(routes, check_for = value)
+    routes.should_not be_empty
+    routes.each do |route|
+      send(route[:method], route[:route]).body.should == check_for
+      $after_filter.should == check_for
+      $after_filter = ""
+    end
+  end
+
+  def filter_setup(opts = {})
+    @class_const.register Bebop
+
+    return_value = value
+    value_block = Proc.new { @value }
+    filter_block = Proc.new { @value = return_value; $after_filter = return_value }
+
+    routes = @class_const.resource :foos do |foo|
+      [:before, :after].each do |type|
+        foo.send(type, *(opts[:filter_targets] || []), &filter_block)
+      end
+
+      if opts[:ids]
+        opts[:ids].each do |id|
+          define_all_route_methods(foo, :id => id, &value_block)
+        end
+      else
+        define_all_route_methods(foo, &value_block)
+      end
+    end
+
+    @test_app = @class_const.new
+    routes
   end
 end
