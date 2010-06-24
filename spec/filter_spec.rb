@@ -24,7 +24,7 @@ describe "filters" do
   end
 
   context "targeted at specific routes" do
-    let(:value) { "bar route" }
+    let(:value) { "specific route" }
 
     it "should run on those routes" do
       @class_const = 'Targeted'
@@ -43,7 +43,7 @@ describe "filters" do
   end
 
   context "targeted at many routes" do
-    let(:value) { "many targeted route" }
+    let(:value) { "many targeted routes" }
 
     context "that are vanilla" do
       it "should run on each route" do

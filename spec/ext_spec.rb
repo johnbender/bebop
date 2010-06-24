@@ -58,66 +58,6 @@ describe Bebop do
     response_equal('baz')
   end
 
-  it "should not call before and after blocks in a nested resource based on the identifer" do
-    put '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_UPDATE}/, :not)
-  end
-
-  it "should call before all blocks on all resource routes" do
-    put '/foos/1'
-    response_match(/#{TestClass::BEFORE_ALL}/)
-
-    post '/foos'
-    response_match(/#{TestClass::BEFORE_ALL}/)
-
-    get '/foos/1/bars'
-    response_match(/#{TestClass::BEFORE_ALL}/)
-
-    delete '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_ALL}/)
-
-    put '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_ALL}/)
-  end
-
-  it "should call before and after resource blocks only on the nested resource routes" do
-    get '/foos/1/bars'
-    response_match(/#{TestClass::BEFORE_BARS}/)
-
-    delete '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_BARS}/)
-  end
-
-  it "should not call before and after resource blocks on non nested resource blocks" do
-    post '/foos'
-    response_not_match(/#{TestClass::BEFORE_BARS}/)
-  end
-
-  it "should call before and after filters without any identifier specified before all routes" do
-    put '/foos/1'
-    response_match(/#{TestClass::BEFORE_ALL_2}/)
-
-    post '/foos'
-    response_match(/#{TestClass::BEFORE_ALL_2}/)
-
-    get '/foos/1/bars'
-    response_match(/#{TestClass::BEFORE_ALL_2}/)
-
-    delete '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_ALL_2}/)
-
-    put '/foos/1/bars/1'
-    response_match(/#{TestClass::BEFORE_ALL_2}/)
-  end
-
-  it "should call before and after filters that specify multiple identifiers before the proper routes" do
-    post '/foos'
-    TestClass.after.should == TestClass::AFTER_VALUE
-
-    put '/foos/1'
-    TestClass.after.should == TestClass::AFTER_VALUE
-  end
-
   it "should not prepend previous nested routes on non nested routes that follow" do
     get '/foos/do/something'
     response_match(/success/)
@@ -126,18 +66,6 @@ describe Bebop do
   it "should produce correct routes for more than 2 levels of nesting" do
     get '/foos/1/bars/2/bazs'
     response_equal "two levels of nesting"
-  end
-
-  context "targeted filters" do
-    it "should run targetted before filters with the proper id specified" do
-      get '/foos/bak_filter_target'
-      response_equal 'bak'
-    end
-
-    it "should not run filters for other routes that follow the filter" do
-      get '/foos/not_bak_filter_target'
-      response_not_match /bak/
-    end
   end
 
   def response_match(regex, mod=nil)
